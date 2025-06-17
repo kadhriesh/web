@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pythonproject"
+name = "api"
 version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
@@ -11,13 +11,15 @@ streamlit = "^1.31.0"
 #huggingface = "^0.16.4"
 uvicorn= "^0.22.0"
 fastapi = "^0.103.1"
+python-dotenv = "^1.0.0"
+pymongo = "^4.5.0"
 
 [tool.isort]
 profile = "black"
 line_length = 88
 multi_line_output = 3
 include_trailing_comma = true
-known_first_party = ["pythonproject"]
+known_first_party = ["api"]
 
 
 [tool.poetry.dev-dependencies]
@@ -26,6 +28,12 @@ flake8 = "^6.1.0"
 pylint = "^3.1.0"
 ruff = "^0.7.0"
 
+[tool.ruff]
+line-length = 88
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+start = "bootstrap:bootstrap"
