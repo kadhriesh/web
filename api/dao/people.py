@@ -13,9 +13,12 @@ class PeopleDAO(BaseDao):
         return self.db.get_people_by_id(people_id)
 
     def add_people(self, people):
-        db = self.getmongo_client
-        id = db.people.insert_one(people)
-        return id.inserted_id
+        try:
+            db = self.getmongo_client
+            id = db.people.insert_one(people)
+            return id.inserted_id
+        except (Exception) as e:
+            raise e()
 
     def update_people(self, people_id, people_data):
         return self.db.update_people(people_id, people_data)
