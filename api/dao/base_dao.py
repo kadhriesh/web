@@ -9,7 +9,9 @@ class BaseDao:
     """
     __mongo_instance = None
     def __new__(cls):
-        __mongo_instance = MongoDBConnection().get_database()
+        if cls.__mongo_instance is None:
+            cls.__mongo_instance = MongoDBConnection().get_database()
+        return super().__new__(cls)
 
     @property
     def getmongo_client(self):

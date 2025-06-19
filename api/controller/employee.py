@@ -1,7 +1,7 @@
 # main.py
 from typing import List
 
-from api.controller import router
+from fastapi.routing import APIRouter
 from pydantic import BaseModel
 
 class Employee(BaseModel):
@@ -10,6 +10,8 @@ class Employee(BaseModel):
     department: str
 
 employees: List[Employee] = []
+
+router = APIRouter()
 
 @router.post("/employees", response_model=Employee)
 def add_employee(employee: Employee):

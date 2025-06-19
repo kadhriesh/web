@@ -6,21 +6,22 @@ from api.utils.mongo_connection import MongoDBConnection
 from api.model.people import People
 from api.service.people import PeopleSvc
 
-from api.controller import router as app
 
-@app.post("/people", response_model=People)
+router = APIRouter()
+
+@router.post("/people", response_model=People)
 def create_People(People: People):
     service = PeopleSvc()
-    id = service.create_people(People)
+    id = service.add_people(people_data=People)
     return id
 
-@app.get("/people", response_model=List[People])
+@router.get("/people", response_model=List[People])
 def list_people():
     db = MongoDBConnection().get_database()
     people = list(db.people.find())
     return [p for p in people]
 
-@app.get("/people/{People_id}", response_model=People)
+@router.get("/people/{People_id}", response_model=People)
 def get_People(People_id: str):
     db = MongoDBConnection().get_database()
     People = db.people.find_one({"_id": ObjectId(People_id)})
@@ -28,7 +29,7 @@ def get_People(People_id: str):
         raise HTTPException(status_code=404, detail="People not found")
     return People
 
-@app.put("/people/{People_id}", response_model=People)
+@router.put("/people/{People_id}", response_model=People)
 def update_People(People_id: str, People: People):
     db = MongoDBConnection().get_database()
     update_data = People.dict(exclude_unset=True, by_alias=True)
@@ -41,7 +42,7 @@ def update_People(People_id: str, People: People):
         raise HTTPException(status_code=404, detail="People not found")
     return result
 
-@app.delete("/people/{People_id}")
+@router.delete("/people/{People_id}")
 def delete_People(People_id: str):
     db = MongoDBConnection().get_database()
     result = db.people.delete_one({"_id": ObjectId(People_id)})

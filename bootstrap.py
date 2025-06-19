@@ -1,14 +1,14 @@
 import uvicorn
-from fastapi import FastAPI
+from api.controller.people import router as people_router
+from api.controller.employee import router as employee_router
+from fastapi import APIRouter, FastAPI
 
-from api.controller import router
-from api.controller import employee,people
-
+app = FastAPI()
+app.include_router(people_router)
+app.include_router(employee_router)
 
 def bootstrap():
-    # app.include_router(employee, prefix="/api/v1", tags=["v1"])
-    # app.include_router(people, prefix="/api/v1", tags=["v1"])
-    app = FastAPI()
-    app.include_router(router)
     uvicorn.run(app, host="localhost")
 
+if __name__ == "__main__":
+    bootstrap()

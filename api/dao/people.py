@@ -1,11 +1,10 @@
 from api.dao.base_dao import BaseDao
 
 
-class PeopleDAO (BaseDao):
+class PeopleDAO(BaseDao):
 
     def __init__(self):
         super().__init__()
-        self.getmongo_client.get_collection("people")
 
     def get_people(self,people):
         return id.inserted_id

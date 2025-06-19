@@ -4,7 +4,8 @@ from api.dao.people import PeopleDAO
 class PeopleSvc:
 
     def __init__(self):
-        self.people_dao = PeopleDAO()
+        pass
+
 
     def get_people(self):
         return self.people_dao.get_people()
@@ -13,7 +14,8 @@ class PeopleSvc:
         return self.people_dao.get_people(people_id)
 
     def add_people(self, people_data):
-        return self.people_dao.add_people(people_data)
+        people_dao = PeopleDAO()
+        return people_dao.add_people(people_data)
 
     def update_people(self, people_id, people_data):
         return self.people_dao.update_people(people_id, people_data)
