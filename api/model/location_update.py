@@ -1,5 +1,12 @@
-from pydantic import BaseModel, Field
-from typing import Optional
+from typing import (
+    Optional,
+)
+
+from pydantic import (
+    BaseModel,
+    Field,
+)
+
 
 class LocationUpdate(BaseModel):
     person_id: int = Field(..., description="Unique identifier for the person")

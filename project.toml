@@ -1,0 +1,5 @@
+[[processes]]
+type = "web"
+command = "uvicorn"
+args = ["-m", "bootstrap:app"]
+default = true

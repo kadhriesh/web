@@ -1,9 +1,15 @@
 # api/utils/mongo_connection.py
 import os
-from pymongo import MongoClient
-from dotenv import load_dotenv
+
+from dotenv import (
+    load_dotenv,
+)
+from pymongo import (
+    MongoClient,
+)
 
 load_dotenv()
+
 
 class MongoDBConnection:
     _instance = None
@@ -12,7 +18,7 @@ class MongoDBConnection:
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(MongoDBConnection, cls).__new__(cls)
-            cls._client = MongoClient(os.getenv('DATABASE_URL'))
+            cls._client = MongoClient(os.getenv("DATABASE_URL"))
         return cls._instance
 
     @property
@@ -20,5 +26,5 @@ class MongoDBConnection:
         return self._client
 
     def get_database(self, db_name=None):
-        db_name = db_name or os.getenv('DATABASE_NAME', 'pts')
-        return self._client
+        db_name = db_name or os.getenv("DATABASE_NAME", "pts")
+        return self._client[db_name]
