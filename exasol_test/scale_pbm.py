@@ -27,7 +27,7 @@ from leading_wildcard_test import main
 
 async def main_corutine(shutdown_event):
     # tasks = [asyncio.create_task(read_data(shutdown_event)) for _ in range(1, 10)]
-    tasks = [asyncio.create_task(main(shutdown_event))]
+    tasks = [asyncio.create_task(main(shutdown_event)) for _ in range(1, 5)]
     done, pending = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
     for data in done:
         result = await data
